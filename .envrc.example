@@ -1,0 +1,4 @@
+source_up
+
+export GITHUB_TOKEN=""
+export CLOUDFLARE_API_TOKEN=""
