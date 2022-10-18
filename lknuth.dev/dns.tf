@@ -42,3 +42,9 @@ resource "cloudflare_zone_settings_override" "overrides" {
     always_use_https         = "on"
   }
 }
+
+resource "cloudflare_zone_dnssec" "dnssec" {
+  # NOTE: This might fail on first apply with "unmarshalling error"
+  # https://github.com/cloudflare/terraform-provider-cloudflare/issues/1486
+  zone_id = local.cloudflare_zone_id
+}
