@@ -23,9 +23,12 @@ resource "cloudflare_zone_settings_override" "overrides" {
   zone_id = local.cloudflare_zone_id
 
   settings {
-	automatic_https_rewrites = "on"
-	tls_1_3 = "on"
-	ssl = "strict"
-	always_use_https = "on"
+    # IMPORTANT! GitHub Pages cant issue LetsEncrypt cert behind CloudFlare!
+    # https://community.cloudflare.com/t/github-pages-require-disabling-cfs-http-proxy/147401/31
+    ssl = "flexible"
+
+    automatic_https_rewrites = "on"
+    tls_1_3                  = "on"
+    always_use_https         = "on"
   }
 }
