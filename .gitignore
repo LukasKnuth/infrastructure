@@ -1,1 +1,5 @@
+# Don't leak secrets with the real environment config
 .envrc
+
+# Don't store Terraform state (leaks sensitive info)
+**/.terraform*
