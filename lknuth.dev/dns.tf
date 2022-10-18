@@ -1,20 +1,30 @@
 resource "cloudflare_record" "pages_ipv4" {
+  for_each = local.github_pages_ipv4_addresses
+
   zone_id = local.cloudflare_zone_id
   type    = "A"
   name    = local.apex_domain
-  value   = "185.199.108.153" # todo add other IPs!
+  value   = each.key
   proxied = true
 }
 
-resource "cloudflare_record" "pages_www_ipv4" {
+resource "cloudflare_record" "pages_ipv6" {
+  for_each = local.github_pages_ipv6_addresses
+
+  zone_id = local.cloudflare_zone_id
+  type    = "AAAA"
+  name    = local.apex_domain
+  value   = each.key
+  proxied = true
+}
+
+resource "cloudflare_record" "pages_www" {
   zone_id = local.cloudflare_zone_id
   type    = "CNAME"
   name    = "www"
   value   = local.apex_domain
   proxied = true
 }
-
-# todo add AAAA records!
 
 resource "cloudflare_zone_settings_override" "overrides" {
   # When chaingng these, and getting "cant set - readonly", remove this
