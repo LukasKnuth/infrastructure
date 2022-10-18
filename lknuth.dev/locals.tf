@@ -1,6 +1,6 @@
 locals {
   cloudflare_zone_id = "64f0ace60d79e9265f5ef9bdf3f91d4d"
-  apex_domain = "lknuth.dev"
+  apex_domain        = "lknuth.dev"
 
   # Taken from https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
   github_pages_ipv4_addresses = [

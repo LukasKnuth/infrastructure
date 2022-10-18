@@ -7,8 +7,8 @@ resource "github_repository" "repo" {
 
   # https://github.com/integrations/terraform-provider-github/issues/777
   pages {
-	# This whole block set anything and causes when applying changes
-	# Additionally, make sure "Enforce HTTPS" is checked in UI!
+    # This whole block set anything and causes when applying changes
+    # Additionally, make sure "Enforce HTTPS" is checked in UI!
     cname = local.apex_domain
     source {
       branch = "main"
