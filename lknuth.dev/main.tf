@@ -11,10 +11,6 @@ terraform {
   }
 }
 
-provider "github" {
-  # Loads auth config from "GITHUB_TOKEN" 
-}
-
 provider "cloudflare" {
   # Loads auth config from "CLOUDFLARE_API_TOKEN"
 }
