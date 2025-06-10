@@ -57,8 +57,8 @@ resource "porkbun_dns_record" "pages_www" {
 resource "porkbun_dns_record" "pages_verify" {
   domain    = local.apex_domain
   type      = "TXT"
-  subdomain = local.github_pages_verify_dns_name
-  content   = local.github_pages_verify_dns_value
+  subdomain = lower(local.github_pages_verify_dns_name)
+  content   = lower(local.github_pages_verify_dns_value)
 }
 
 resource "cloudflare_zone_settings_override" "overrides" {
