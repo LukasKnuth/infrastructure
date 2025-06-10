@@ -1,7 +1,6 @@
 locals {
-  cloudflare_zone_id = "64f0ace60d79e9265f5ef9bdf3f91d4d"
-  apex_domain        = "lknuth.dev"
-  postmaster_email   = "lukas.knuth@mailbox.org"
+  apex_domain      = "lknuth.dev"
+  postmaster_email = "lukas.knuth@mailbox.org"
 
   # Taken from https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
   github_pages_ipv4_addresses = toset([
@@ -17,8 +16,6 @@ locals {
   }
 
   # Taken from the mailbox configuration dialoge
-  mailbox_verify_dns_host  = "c7c2ce1b7cdb29a3d22099d6db062d0f8c6aec25.lknuth.dev."
-  mailbox_verify_dns_value = "9e2ad31517ea49bfb7915db8b5d31621918ceed5"
   mailbox_verify = {
     name = "c7c2ce1b7cdb29a3d22099d6db062d0f8c6aec25", value = "9e2ad31517ea49bfb7915db8b5d31621918ceed5"
   }
@@ -30,12 +27,6 @@ locals {
 
   # Taken from https://kb.mailbox.org/de/privat/e-mail-mit-eigener-domain/spam-reputation-der-eigenen-domain-verbessern-mit-spf-dkim-und-dmarc
   mailbox_spf_value = "v=spf1 include:mailbox.org ~all"
-  mailbox_dkim_dns = [
-    { host = "MBO0001._domainkey.${local.apex_domain}", target = "MBO0001._domainkey.mailbox.org." },
-    { host = "MBO0002._domainkey.${local.apex_domain}", target = "MBO0002._domainkey.mailbox.org." },
-    { host = "MBO0003._domainkey.${local.apex_domain}", target = "MBO0003._domainkey.mailbox.org." },
-    { host = "MBO0004._domainkey.${local.apex_domain}", target = "MBO0004._domainkey.mailbox.org." }
-  ]
   mailbox_dkim = [
     { name = "MBO0001._domainkey", value = "MBO0001._domainkey.mailbox.org." },
     { name = "MBO0002._domainkey", value = "MBO0002._domainkey.mailbox.org." },

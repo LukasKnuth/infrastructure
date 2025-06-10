@@ -11,10 +11,6 @@ terraform {
   }
 }
 
-provider "cloudflare" {
-  # Loads auth config from "CLOUDFLARE_API_TOKEN"
-}
-
 provider "porkbun" {
   # Loads auth from "PORKBUN_API_KEY" and "PORKBUN_SECRET_API_KEY"
 }
