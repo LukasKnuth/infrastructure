@@ -9,7 +9,7 @@ resource "cloudflare_record" "mailbox_validation" {
 resource "porkbun_dns_record" "mailbox_validation" {
   domain    = local.apex_domain
   type      = "TXT"
-  subdomain = local.mailbox_verify_dns_host # apex
+  subdomain = local.mailbox_verify_dns_name
   content   = local.mailbox_verify_dns_value
 }
 

@@ -14,7 +14,8 @@ locals {
   ])
 
   # Taken from the mailbox configuration dialoge
-  mailbox_verify_dns_host = "c7c2ce1b7cdb29a3d22099d6db062d0f8c6aec25.lknuth.dev."
+  mailbox_verify_dns_host  = "c7c2ce1b7cdb29a3d22099d6db062d0f8c6aec25.lknuth.dev."
+  mailbox_verify_dns_name  = "c7c2ce1b7cdb29a3d22099d6db062d0f8c6aec25"
   mailbox_verify_dns_value = "9e2ad31517ea49bfb7915db8b5d31621918ceed5"
   mailbox_servers_dns = [
     { server = "mxext1.mailbox.org.", priority = 10 },
