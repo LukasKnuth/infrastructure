@@ -1,13 +1,4 @@
-resource "cloudflare_record" "pages_ipv4" {
-  for_each = local.github_pages_ipv4_addresses
-
-  zone_id = local.cloudflare_zone_id
-  type    = "A"
-  name    = local.apex_domain
-  value   = each.key
-  proxied = true
-}
-
+# Server GitHub Pages under apex domain
 resource "porkbun_dns_record" "pages_ipv4" {
   for_each = local.github_pages_ipv4_addresses
 
@@ -15,16 +6,6 @@ resource "porkbun_dns_record" "pages_ipv4" {
   subdomain = "" # apex
   type      = "A"
   content   = each.key
-}
-
-resource "cloudflare_record" "pages_ipv6" {
-  for_each = local.github_pages_ipv6_addresses
-
-  zone_id = local.cloudflare_zone_id
-  type    = "AAAA"
-  name    = local.apex_domain
-  value   = each.key
-  proxied = true
 }
 
 resource "porkbun_dns_record" "pages_ipv6" {
@@ -36,14 +17,8 @@ resource "porkbun_dns_record" "pages_ipv6" {
   content   = each.key
 }
 
-resource "cloudflare_record" "pages_www" {
-  zone_id = local.cloudflare_zone_id
-  type    = "CNAME"
-  name    = "www"
-  value   = local.apex_domain
-  proxied = true
-}
-
+# Serve the `www` subdomain as well. In practice, this redirects to the apex domain
+# automatically (its a GitHub setting).
 resource "porkbun_dns_record" "pages_www" {
   domain    = local.apex_domain
   subdomain = "www"
@@ -64,25 +39,3 @@ resource "porkbun_dns_record" "pages_verify" {
   content   = lower(local.github_pages_verify.value)
 }
 
-resource "cloudflare_zone_settings_override" "overrides" {
-  # When chaingng these, and getting "cant set - readonly", remove this
-  # with "terraform state rm <type>.<name>" and try again.
-  # https://github.com/cloudflare/terraform-provider-cloudflare/issues/1297
-  zone_id = local.cloudflare_zone_id
-
-  settings {
-    # IMPORTANT! GitHub Pages cant issue LetsEncrypt cert behind CloudFlare!
-    # https://community.cloudflare.com/t/github-pages-require-disabling-cfs-http-proxy/147401/31
-    ssl = "flexible"
-
-    automatic_https_rewrites = "on"
-    tls_1_3                  = "on"
-    always_use_https         = "on"
-  }
-}
-
-resource "cloudflare_zone_dnssec" "dnssec" {
-  # NOTE: This might fail on first apply with "unmarshalling error"
-  # https://github.com/cloudflare/terraform-provider-cloudflare/issues/1486
-  zone_id = local.cloudflare_zone_id
-}
