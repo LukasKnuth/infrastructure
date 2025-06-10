@@ -51,6 +51,13 @@ resource "porkbun_dns_record" "pages_www" {
   content   = local.apex_domain # just redirect back to main
 }
 
+resource "porkbun_dns_record" "pages_verify" {
+  domain    = local.apex_domain
+  type      = "TXT"
+  subdomain = local.github_pages_verify_dns_name
+  content   = local.github_pages_verify_dns_value
+}
+
 resource "cloudflare_zone_settings_override" "overrides" {
   # When chaingng these, and getting "cant set - readonly", remove this
   # with "terraform state rm <type>.<name>" and try again.
