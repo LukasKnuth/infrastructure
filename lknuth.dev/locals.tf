@@ -12,13 +12,16 @@ locals {
     "2606:50c0:8000::153", "2606:50c0:8001::153",
     "2606:50c0:8002::153", "2606:50c0:8003::153"
   ])
-  github_pages_verify_dns_name  = "_github-pages-challenge-LukasKnuth"
-  github_pages_verify_dns_value = "3a0a314b5d64ea815f72f149cb9ac5"
+  github_pages_verify = {
+    name = "_github-pages-challenge-LukasKnuth", value = "3a0a314b5d64ea815f72f149cb9ac5"
+  }
 
   # Taken from the mailbox configuration dialoge
   mailbox_verify_dns_host  = "c7c2ce1b7cdb29a3d22099d6db062d0f8c6aec25.lknuth.dev."
-  mailbox_verify_dns_name  = "c7c2ce1b7cdb29a3d22099d6db062d0f8c6aec25"
   mailbox_verify_dns_value = "9e2ad31517ea49bfb7915db8b5d31621918ceed5"
+  mailbox_verify = {
+    name = "c7c2ce1b7cdb29a3d22099d6db062d0f8c6aec25", value = "9e2ad31517ea49bfb7915db8b5d31621918ceed5"
+  }
   mailbox_servers_dns = [
     { server = "mxext1.mailbox.org.", priority = 10 },
     { server = "mxext2.mailbox.org.", priority = 10 },

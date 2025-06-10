@@ -9,8 +9,8 @@ resource "cloudflare_record" "mailbox_validation" {
 resource "porkbun_dns_record" "mailbox_validation" {
   domain    = local.apex_domain
   type      = "TXT"
-  subdomain = local.mailbox_verify_dns_name
-  content   = local.mailbox_verify_dns_value
+  subdomain = local.mailbox_verify.name
+  content   = local.mailbox_verify.value
 }
 
 # configure their mail-servers to be forwarded to

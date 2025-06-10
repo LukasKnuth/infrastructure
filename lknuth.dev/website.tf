@@ -54,11 +54,14 @@ resource "porkbun_dns_record" "pages_www" {
   content = "lukasknuth.github.io"
 }
 
+# Setup GitHub Pages verification as a security measure to disallow any other accounts from
+# using my domain in their sites.
+# See https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages
 resource "porkbun_dns_record" "pages_verify" {
   domain    = local.apex_domain
   type      = "TXT"
-  subdomain = lower(local.github_pages_verify_dns_name)
-  content   = lower(local.github_pages_verify_dns_value)
+  subdomain = lower(local.github_pages_verify.name)
+  content   = lower(local.github_pages_verify.value)
 }
 
 resource "cloudflare_zone_settings_override" "overrides" {
