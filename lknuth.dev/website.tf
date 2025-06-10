@@ -48,7 +48,10 @@ resource "porkbun_dns_record" "pages_www" {
   domain    = local.apex_domain
   subdomain = "www"
   type      = "CNAME"
-  content   = local.apex_domain # just redirect back to main
+  # Must point to the github name directly, otherwise GitHub Pages does not create a
+  # TLS certificate that is valid for both Apex and WWW subdomain.
+  # See https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https#verifying-the-dns-configuration
+  content = "lukasknuth.github.io"
 }
 
 resource "porkbun_dns_record" "pages_verify" {
