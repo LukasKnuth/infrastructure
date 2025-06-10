@@ -62,7 +62,7 @@ resource "cloudflare_record" "mailbox_spam_dkim" {
 }
 
 resource "porkbun_dns_record" "mailbox_spam_dkim" {
-  for_each = { for d in local.mailbox_dkim_dns : d.host => d.target }
+  for_each = { for d in local.mailbox_dkim : d.name => d.value }
 
   domain    = local.apex_domain
   type      = "CNAME"
@@ -81,6 +81,6 @@ resource "cloudflare_record" "mailbox_spam_dmarc" {
 resource "porkbun_dns_record" "mailbox_spam_dmarc" {
   domain    = local.apex_domain
   type      = "TXT"
-  subdomain = "_dmarc.${local.apex_domain}"
+  subdomain = "_dmarc"
   content   = "v=DMARC1;p=none;rua=mailto:${local.postmaster_email}"
 }

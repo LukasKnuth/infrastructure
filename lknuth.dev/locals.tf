@@ -33,6 +33,12 @@ locals {
     { host = "MBO0003._domainkey.${local.apex_domain}", target = "MBO0003._domainkey.mailbox.org." },
     { host = "MBO0004._domainkey.${local.apex_domain}", target = "MBO0004._domainkey.mailbox.org." }
   ]
+  mailbox_dkim = [
+    { name = "MBO0001._domainkey", value = "MBO0001._domainkey.mailbox.org." },
+    { name = "MBO0002._domainkey", value = "MBO0002._domainkey.mailbox.org." },
+    { name = "MBO0003._domainkey", value = "MBO0003._domainkey.mailbox.org." },
+    { name = "MBO0004._domainkey", value = "MBO0004._domainkey.mailbox.org." }
+  ]
 
   # dynv6 Nameservers taken from controle plane
   dynv6_ns = toset([
