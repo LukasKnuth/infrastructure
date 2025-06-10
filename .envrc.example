@@ -1,4 +1,5 @@
-source_up
+source_up_if_exists
 
-export GITHUB_TOKEN=""
 export CLOUDFLARE_API_TOKEN=""
+export PORKBUN_API_KEY=""
+export PORKBUN_SECRET_API_KEY=""
